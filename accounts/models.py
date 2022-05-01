@@ -20,7 +20,7 @@ class ExpenseTitle(TimestampModel,UserstampModel):
 class Expense(TimestampModel,UserstampModel):
     name = models.CharField(max_length=100,unique=True,verbose_name=_("name"))
     expense_title = models.ForeignKey(ExpenseTitle,on_delete=models.CASCADE,verbose_name=_("expense title"))
-    bill_image = models.ImageField(upload_to='bills',blank=True,null=True,default=True,verbose_name=_("bill image"))
+    bill_image = models.ImageField(upload_to='bills',blank=True,null=True,default='bill.jpeg',verbose_name=_("bill image"))
 
     def __str__(self) -> str:
         return self.name
@@ -32,9 +32,9 @@ class Expense(TimestampModel,UserstampModel):
 
 class ExpenseItem(TimestampModel,UserstampModel):
     name = models.CharField(max_length=100,unique=True,verbose_name=_("name"))
-    expense = models.ForeignKey(Expense,on_delete=models.CASCADE,verbose_name=_("expense"))
+    expense = models.ForeignKey(Expense,on_delete=models.CASCADE,verbose_name=_("expense"),related_name='expense_items')
     quantity = models.PositiveIntegerField(verbose_name=_("quantity"))
-    price = models.DecimalField(max_digits=5,decimal_places=2,verbose_name=_("quantity"))
+    price = models.DecimalField(max_digits=5,decimal_places=2,verbose_name=_("unit_price"))
 
     def __str__(self) -> str:
         return self.name
