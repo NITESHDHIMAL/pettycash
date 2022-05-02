@@ -16,7 +16,8 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path,include
 from rest_framework import routers
-from accounts.views import ExpenseTitleViewSet, ExpenseViewSet
+from accounts.serializers import AccountHeadSerializer
+from accounts.views import AccountHeadViewSet, ExpenseTitleViewSet, ExpenseViewSet, TopupViewset
 
 #viewsets
 from users.views import UserViewSet
@@ -28,6 +29,9 @@ router = routers.DefaultRouter()
 router.register('user',UserViewSet,basename='user')
 router.register('expense-title',ExpenseTitleViewSet,basename='expens-title')
 router.register('expense',ExpenseViewSet,basename='expense')
+router.register('topup',TopupViewset,basename='topup')
+router.register('account-head',AccountHeadViewSet,basename='account-head')
+
 
 urlpatterns = [
     path('admin/', admin.site.urls),

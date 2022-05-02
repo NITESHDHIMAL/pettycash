@@ -8,5 +8,7 @@ from .models import *
 admin.site.register(ExpenseTitle)
 admin.site.register(Expense)
 admin.site.register(ExpenseItem)
+admin.site.register(Topup)
+admin.site.register(AccountHead)
 
 

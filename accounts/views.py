@@ -55,13 +55,28 @@ class ExpenseTitleViewSet(viewsets.ModelViewSet):
 
 
 
+# class ExpenseViewSet(viewsets.ViewSet):
+
+#     def list(self,request,*args,**kwargs):
+#         queryset = Expense.objects.all()
+#         serialized = ExpenseSerializer(queryset,many=True)
+
+#         return Response(serialized.data)
+
+
+
 class ExpenseViewSet(viewsets.ViewSet):
+    queryset = Expense.objects.all()
+    serialized = ExpenseSerializer
+ 
 
-    def list(self,request,*args,**kwargs):
-        queryset = Expense.objects.all()
-        serialized = ExpenseSerializer(queryset,many=True)
+class TopupViewset(viewsets.ModelViewSet):
+    serializer_class = TopUpSerializer
+    queryset = Topup.objects.all()
 
-        return Response(serialized.data)
+class AccountHeadViewSet(viewsets.ReadOnlyModelViewSet):
+    queryset = AccountHead.objects.all()
+    serializer_class = AccountHeadSerializer
 
 
 

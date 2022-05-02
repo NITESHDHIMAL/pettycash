@@ -59,7 +59,7 @@ class Topup(TimestampModel,UserstampModel):
 class AccountHead(TimestampModel,UserstampModel):
     total_expense_amount = models.DecimalField(max_digits=5,decimal_places=3,default=0,verbose_name=_("total expense amount"))
     remaining_amount = models.DecimalField(max_digits=5,decimal_places=3,default=0,verbose_name=_("remaining amount"))
-    total_expense_amount = models.DecimalField(max_digits=5,decimal_places=3,default=0,verbose_name=_("total topup amount"))
+    total_topup_amount = models.DecimalField(max_digits=5,decimal_places=3,default=0,verbose_name=_("total topup amount"))
 
     def __str__(self) -> str:
         return str(self.total_expense_amount)
