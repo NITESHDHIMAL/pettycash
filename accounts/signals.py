@@ -17,7 +17,28 @@ def update_account_head_on_topup(sender,instance,created,**kwargs):
         account_head.total_topup_amount = new_topup_amount
         account_head.save()
          
+
+@receiver(post_save,sender=ExpenseItem)
+def update_account_head_on_expense(sender,instance,created,**kwargs):
+    if created:
+        account_head,created = AccountHead.objects.get_or_create(id=1)
+        old_expense_amount = account_head.total_expense_amount
+        old_remaining_amount = account_head.remaining_amount
+
+        new_remaining_amount = old_remaining_amount - (instance.quantity*instance.price)
+        new_expense_amount = old_expense_amount + (instance.quantity*instance.price)
+
+        account_head.remaining_amount = new_remaining_amount
+        account_head.total_expense_amount = new_expense_amount
+        account_head.save()
+
         
+
+        
+
+
+
+
 
 
  

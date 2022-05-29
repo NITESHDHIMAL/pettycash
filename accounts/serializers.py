@@ -64,7 +64,7 @@ class ExpenseSerializer(serializers.ModelSerializer):
 
 
     def create(self, validated_data):
-        expense_items = validated_data.poop("expense_items")
+        expense_items = validated_data.pop("expense_items")
         expense = super().create(validated_data)
         for expense_item in expense_items:
             expense_item['expense'] = expense.id

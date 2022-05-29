@@ -6,6 +6,12 @@ from .serializers import *
 from rest_framework import permissions
 
 
+# for group topup permissions
+# class CreateTopupPermission(permissions.BasePermission):
+#     def has_permission(self, request, view):
+#         return request.user.groups.has_perm('can_add_topup')
+ 
+
  
 # list->handle the get request
 #request->GET,POST,,DELETE,PUT,PATCH,OPTIONS
@@ -49,8 +55,8 @@ class ExpenseTitleViewSet(viewsets.ModelViewSet):
 
     serializer_class = ExpenseTitleSerializer
     queryset = ExpenseTitle.objects.filter(enable=True)
-    permission_classes = [permissions.AllowAny]
-    # permission_classes = [permissions.IsAuthenticated]
+    # permission_classes = [permissions.AllowAny]
+    permission_classes = [permissions.IsAuthenticated]
 
 
 
@@ -65,18 +71,21 @@ class ExpenseTitleViewSet(viewsets.ModelViewSet):
 
 
 
-class ExpenseViewSet(viewsets.ViewSet):
+class ExpenseViewSet(viewsets.ModelViewSet):
     queryset = Expense.objects.all()
-    serialized = ExpenseSerializer
+    serializer_class = ExpenseSerializer
+    # permission_classes = [permissions.IsAuthenticated]
  
 
 class TopupViewset(viewsets.ModelViewSet):
     serializer_class = TopUpSerializer
     queryset = Topup.objects.all()
+    permission_classes = [permissions.IsAuthenticated,permissions.DjangoModelPermissions]
 
 class AccountHeadViewSet(viewsets.ReadOnlyModelViewSet):
     queryset = AccountHead.objects.all()
     serializer_class = AccountHeadSerializer
+    permission_classes = [permissions.IsAuthenticated]
 
 
 
