@@ -1,0 +1,128 @@
+//PETTY CASH
+
+Table users{
+  id int [pk, increment]
+  username varchar [not null ,unique]
+  email varchar [not null]
+  password varchar
+  //
+  first_name varchar
+  last_name varchar
+  is_superuser boolean [default:0]
+  is_staff boolean [default:0]
+  is_active boolean [default:1]
+}
+
+Table profiles {
+  id int [pk, increment]
+  user_id int [not null]
+  token varchar
+  image varchar
+  created_at timestamp
+  updated_at timestamp
+}
+Ref: profiles.user_id - users.id
+
+
+
+//account
+Table expense_title {
+  id int [pk, increment]
+  name varchar [not null]
+  created_at timestamp
+  updated_at timestamp
+  created_by int
+  updated_by int
+}
+Ref: expense_title.created_by > users.id
+Ref: expense_title.updated_by > users.id
+Table expense {
+  id int [pk, increment]
+  name varchar [not null]
+  expense_title_id int
+  image varchar
+  created_at timestamp
+  updated_at timestamp
+  created_by int
+  updated_by int
+}
+Ref:expense.expense_title_id >expense_title.id
+Ref: expense.created_by > users.id
+Ref: expense.updated_by > users.id
+//
+Table expense_items{
+  id int [pk, increment]
+  expense_id int
+  name varchar [not null]
+  quantity int
+  price int
+  created_at timestamp
+  updated_at timestamp
+  created_by int
+  updated_by int
+}
+Ref: expense_items.expense_id > expense.id
+Ref: expense_items.created_by > users.id
+Ref: expense_items.updated_by > users.id
+
+
+//topup
+Table topups {
+  id int [pk, increment]
+  amount int
+  created_at timestamp
+  updated_at timestamp
+  created_by int
+  updated_by int
+}
+Ref: topups.created_by > users.id
+Ref: topups.updated_by > users.id
+
+//overall balance
+
+Table account_head {
+  id int [pk, increment]
+  total_expense_amount int [not null,default:0]
+  remaining_amount int [not null, default:0]
+  total_topup_amount int [not null, default:0]
+  created_at timestamp
+  updated_at timestamp
+  created_by int
+  updated_by int
+}
+Ref: account_head.created_by > users.id
+Ref: account_head.updated_by > users.id
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// Creating tables
+// Table users as U {
+//   id int [pk, increment] // auto-increment
+//   full_name varchar
+//   created_at timestamp
+//   country_code int
+// }
+
+// Table countries {
+//   code int [pk]
+//   name varchar
+//   continent_name varchar
+// }
+//// -- LEVEL 1
+//// -- Tables and References
+
+ 
