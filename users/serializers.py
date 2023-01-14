@@ -26,7 +26,6 @@ class UserRegisterSerializer(serializers.ModelSerializer):
         password2 = validated_data.get('password2')
 
         
-        
         if password ==password2:
             user = User(username=username, email=email)
             user.set_password
@@ -38,22 +37,3 @@ class UserRegisterSerializer(serializers.ModelSerializer):
             })
 
         
-
-        
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
